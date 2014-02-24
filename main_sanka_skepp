@@ -1,0 +1,96 @@
+package 
+{
+	import flash.display.GradientType;
+	import flash.display.Graphics;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.events.TextEvent;
+	import flash.external.ExternalInterface;
+	import flash.filters.GlowFilter;
+	import flash.geom.ColorTransform;
+	import flash.text.TextField;
+	
+	/**
+	 * ...
+	 * @author Alex
+	 */
+	public class Main extends Sprite 
+	{
+		var newCol:ColorTransform = new ColorTransform();
+		private var randomCoord:int = Math.random() * 3;
+		private var tile:Tiles = new Tiles();
+		private var t:TextField = new TextField();
+		private var gF:GlowFilter = new GlowFilter (16711680, 1, 6, 6, 2, 1);
+		private var addShips:Sprite = new Sprite ();
+		private var map:Vector.<Vector.<Sprite>> = new Vector.<Vector.<Sprite>>();
+		public function Main():void 
+		{
+			if (stage) init();
+			else addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		private function init(e:Event = null):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			// entry point
+			addShips.graphics.beginFill (0xFFFFFF);
+			addShips.graphics.drawRect (100, 2, 128, 32);
+			addShips.graphics.endFill();
+			addShips.filters = [gF];
+			addChild (addShips);
+			
+			
+			t.text = ("Click to add ship");
+			t.x = 120;
+			t.y = 3;
+			t.height = 16;
+			
+			addChild (t);
+			
+			
+			
+			//Lägger 10x10 tilemap
+			for (var i:int = 0; i < 10; i++) 
+			{
+				var rows:Vector.<Sprite> = new Vector.<Sprite>();
+				for (var j:int = 0; j < 10; j++) 
+				{	
+					var tile:Tiles = new Tiles();
+					tile.x = 100 + j * (tile.width + 5);
+					tile.y = 100 + i * (tile.height + 5);
+					addChild(tile);
+					rows.push(tile);
+					tile.addEventListener (MouseEvent.CLICK, tilesColorChange);
+				}
+				
+				map.push(rows);
+				
+				addShips.addEventListener (MouseEvent.CLICK, addOneShip);
+			}
+			
+		}
+		
+		private function tilesColorChange(r:MouseEvent):void 
+		{
+			//newCol.color = 0xaaa5a7;
+			Tiles(r.target).clicked();
+			
+		}
+		
+		
+		private function addOneShip(e:MouseEvent):void 
+		{
+				for (var j:int = 0; j < 1; j++) 
+				{
+					for (var i:int = 0; i < 3; i++) 
+					{
+						
+					}
+				}
+		}
+		
+		
+	}
+	
+}

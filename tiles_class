@@ -1,0 +1,27 @@
+package  
+{
+	import flash.display.Sprite;
+	/**
+	 * ...
+	 * @author Alex
+	 */
+	public class Tiles extends Sprite
+	{
+		
+		
+		
+		public function Tiles() 
+		{
+			this.graphics.beginFill(0x0000ff);
+			this.graphics.drawRect(0, 0, 32, 32);
+			this.graphics.endFill();
+			
+		}
+		
+		public function clicked():void 
+		{
+		}
+		
+	}
+
+}
